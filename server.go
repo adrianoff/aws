@@ -5,6 +5,10 @@ import (
 	"net/http"
 )
 
+func getTest(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "FFFF");
+}
+
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(
 		w, 
@@ -493,6 +497,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", getRoot)
+	http.HandleFunc("/test", getTest)
 
 	http.ListenAndServe(":3333", nil)
 }
