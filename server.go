@@ -6,7 +6,8 @@ import (
 )
 
 func getTest(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "035F");
+	w.Header().Set("Content-Length", "100");
+	io.WriteString(w, "035FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
 }
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
