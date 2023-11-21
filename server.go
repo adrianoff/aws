@@ -10,6 +10,8 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 }
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Length", "48000");
+
 	io.WriteString(
 		w, 
 		"035FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" + 
