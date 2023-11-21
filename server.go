@@ -6,7 +6,7 @@ import (
 )
 
 func getTest(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "FFFF");
+	io.WriteString(w, "035F");
 }
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
