@@ -3,11 +3,13 @@ package main
 import (
 	"io"
 	"net/http"
+	"strconv"
 )
 
 func getTest(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Length", "100");
-	io.WriteString(w, "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+	response := "FFFF";
+	w.Header().Set("Content-Length", strconv.Itoa(len(response)));
+	io.WriteString(w, response);
 }
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
