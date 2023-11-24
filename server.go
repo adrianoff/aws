@@ -66,7 +66,7 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := ""
-	for i := 0; i < 48000 && i < len(pixelData); i++ {
+	for i := 0; i < len(pixelData); i++ {
 		response = response + fmt.Sprintf("%02X", pixelData[i])
 	}
 
@@ -75,7 +75,7 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
 	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
 
-	if (limit-offset > len(response)) {
+	if (offset+limit > len(response)) {
 		offset = 0
 		limit  = len(response)
 	}
