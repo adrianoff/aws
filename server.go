@@ -67,7 +67,9 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 
 	response := ""
 	for i := 0; i < len(pixelData); i++ {
-		response = response + fmt.Sprintf("%02X", pixelData[i])
+		fmt.Println("raw: ", fmt.Sprintf("%02X", pixelData[i]))
+		fmt.Println("reverse: ", fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i])))
+		response = response + fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i]))
 	}
 
 	response = Reverse(response)
@@ -95,7 +97,22 @@ func Reverse(s string) string {
     return string(runes)
 }
 
+func reverseBitsInByte(b byte) byte {
+	var result byte
+	for i := 0; i < 8; i++ {
+		result = result<<1 | (b & 1)
+		b >>= 1
+	}
+	return result
+}
+
 func main() {
+	inputByte := byte(255) // Example byte: 10101010
+	fmt.Printf("Original byte in binary: %08b\n", inputByte)
+
+	reversedByte := reverseBitsInByte(inputByte)
+	fmt.Printf("Reversed byte in binary: %08b\n", reversedByte)
+
 	http.HandleFunc("/test", getTest)
 
 	http.ListenAndServe(":3333", nil)
