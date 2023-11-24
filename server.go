@@ -70,6 +70,8 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 		response = response + fmt.Sprintf("%02X", pixelData[i])
 	}
 
+	response = Reverse(response)
+
 	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
 	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
 
@@ -84,6 +86,13 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, response);
 }
 
+func Reverse(s string) string {
+    runes := []rune(s)
+    for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+        runes[i], runes[j] = runes[j], runes[i]
+    }
+    return string(runes)
+}
 
 func main() {
 	http.HandleFunc("/test", getTest)
