@@ -80,6 +80,7 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 		limit  = len(response)
 	}
 
+	fmt.Println(offset, " ", offset+limit)
 	response = response[offset:offset+limit]
 
 	w.Header().Set("Content-Length", strconv.Itoa(len(response)));
