@@ -1,12 +1,9 @@
 package main
 
 import (
-	"io"
-	"net/http"
-	"strconv"
+	"encoding/binary"
 	"fmt"
 	"os"
-	"encoding/binary"
 )
 
 type BitmapFileHeader struct {
@@ -31,7 +28,7 @@ type BitmapInfoHeader struct {
 	ColorsImportant      uint32 // Number of important colors used
 }
 
-func getTest(w http.ResponseWriter, r *http.Request) {
+func main() {
 	filename := "test.bmp"
 
 	file, err := os.Open(filename)
@@ -56,6 +53,25 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Println("Bitmap File Header:")
+	fmt.Printf("Type: %c%c\n", fileHeader.Type[0], fileHeader.Type[1])
+	fmt.Printf("File Size: %d bytes\n", fileHeader.FileSize)
+	fmt.Printf("Pixel Data Offset: %d bytes\n", fileHeader.PixelDataOffset)
+	fmt.Println()
+
+	fmt.Println("Bitmap Info Header:")
+	fmt.Printf("Size: %d bytes\n", infoHeader.Size)
+	fmt.Printf("Width: %d pixels\n", infoHeader.Width)
+	fmt.Printf("Height: %d pixels\n", infoHeader.Height)
+	fmt.Printf("Planes: %d\n", infoHeader.Planes)
+	fmt.Printf("Bits Per Pixel: %d\n", infoHeader.BitsPerPixel)
+	fmt.Printf("Compression: %d\n", infoHeader.Compression)
+	fmt.Printf("Image Size: %d bytes\n", infoHeader.ImageSize)
+	fmt.Printf("Horizontal Resolution: %d pixels per meter\n", infoHeader.HorizontalResolution)
+	fmt.Printf("Vertical Resolution: %d pixels per meter\n", infoHeader.VerticalResolution)
+	fmt.Printf("Colors Used: %d\n", infoHeader.ColorsUsed)
+	fmt.Printf("Colors Important: %d\n", infoHeader.ColorsImportant)
+
 	pixelDataSize := infoHeader.ImageSize
 	file.Seek(int64(fileHeader.PixelDataOffset), 0)
 	pixelData := make([]byte, pixelDataSize)
@@ -65,28 +81,15 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := ""
+	// Print a sample of pixel data (first 100 bytes)
+	fmt.Println("Pixel Data (First 100 bytes):")
+	s := ""
 	for i := 0; i < 48000 && i < len(pixelData); i++ {
-		response = response + fmt.Sprintf("%02X", pixelData[i])
+		s = s + fmt.Sprintf("%02X", pixelData[i])
+		
+		// if (i+1)%16 == 0 {
+		// 	fmt.Println()
+		// }
 	}
-
-	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
-	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
-
-	if (limit-offset > len(response)) {
-		offset = 0
-		limit  = len(response)
-	}
-
-	response = response[offset:offset+limit]
-
-	w.Header().Set("Content-Length", strconv.Itoa(len(response)));
-	io.WriteString(w, response);
-}
-
-
-func main() {
-	http.HandleFunc("/test", getTest)
-
-	http.ListenAndServe(":3333", nil)
+	fmt.Println(len(s))
 }
