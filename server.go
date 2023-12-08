@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 )
 
 type BitmapFileHeader struct {
@@ -86,12 +87,18 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 }
 
 func Reverse(s string) string {
-	runes := []rune(s)
-	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-		runes[i], runes[j] = runes[j], runes[i]
+	var substrings []string
+
+	for i := 0; i < len(s); i += 2 {
+		end := i + 2
+		if end > len(s) {
+			end = len(s)
+		}
+
+		substrings = append([]string{s[i:end]}, substrings...)
 	}
-	
-	return string(runes)
+
+	return strings.Join(substrings, "")
 }
 
 func reverseBitsInByte(b byte) byte {
@@ -99,12 +106,6 @@ func reverseBitsInByte(b byte) byte {
 }
 
 func main() {
-	// inputByte := byte(255) // Example byte: 10101010
-	// fmt.Printf("Original byte in binary: %08b\n", inputByte)
-
-	// reversedByte := reverseBitsInByte(inputByte)
-	// fmt.Printf("Reversed byte in binary: %08b\n", reversedByte)
-
 	http.HandleFunc("/test", getTest)
 
 	http.ListenAndServe(":3333", nil)
