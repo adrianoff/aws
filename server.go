@@ -97,7 +97,7 @@ func Reverse(s string) string {
 }
 
 func reverseBitsInByte(b byte) byte {
-	return b
+	return ^b
 }
 
 func main() {
