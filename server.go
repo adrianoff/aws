@@ -1,20 +1,20 @@
 package main
 
 import (
+	"encoding/binary"
+	"fmt"
 	"io"
 	"net/http"
-	"strconv"
-	"fmt"
 	"os"
-	"encoding/binary"
+	"strconv"
 )
 
 type BitmapFileHeader struct {
-	Type              [2]byte // Signature "BM"
-	FileSize          uint32  // Size of the file in bytes
-	Reserved1         uint16  // Reserved field (unused)
-	Reserved2         uint16  // Reserved field (unused)
-	PixelDataOffset   uint32  // Offset to the start of pixel data
+	Type            [2]byte // Signature "BM"
+	FileSize        uint32  // Size of the file in bytes
+	Reserved1       uint16  // Reserved field (unused)
+	Reserved2       uint16  // Reserved field (unused)
+	PixelDataOffset uint32  // Offset to the start of pixel data
 }
 
 type BitmapInfoHeader struct {
@@ -75,28 +75,29 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
 	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
 
-	if (offset+limit > len(response)) {
+	if offset+limit > len(response) {
 		offset = 0
-		limit  = len(response)
+		limit = len(response)
 	}
 
 	fmt.Println(offset, " ", offset+limit)
-	response = response[offset:offset+limit]
+	response = response[offset : offset+limit]
 
-	w.Header().Set("Content-Length", strconv.Itoa(len(response)));
-	io.WriteString(w, response);
+	w.Header().Set("Content-Length", strconv.Itoa(len(response)))
+	io.WriteString(w, response)
 }
 
 func Reverse(s string) string {
-    runes := []rune(s)
-    for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-        runes[i], runes[j] = runes[j], runes[i]
-    }
-    return string(runes)
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return s
+	//return string(runes)
 }
 
 func reverseBitsInByte(b byte) byte {
-	return ^b
+	return b
 }
 
 func main() {
