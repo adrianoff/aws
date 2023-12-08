@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"slices"
 	"strconv"
 )
 
@@ -65,8 +66,9 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	slices.Reverse(pixelData)
 	response := ""
-	for i := len(pixelData); i >= 1; i-- {
+	for i := 0; i < len(pixelData); i++ {
 		response = response + fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i]))
 	}
 
