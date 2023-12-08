@@ -65,15 +65,10 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//slices.Reverse(pixelData)
 	response := ""
-	for i := 0; i < len(pixelData); i = i + 2 {
-		first := fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i]))
-		second := fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i+1]))
-		response = response + first + second
+	for i := 0; i < len(pixelData); i++ {
+		response = response + fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i]))
 	}
-
-	response = Reverse(response)
 
 	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
 	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
@@ -84,7 +79,7 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(offset, " ", offset+limit)
-	response = response[offset : offset+limit]
+	response = Reverse(response[offset : offset+limit])
 
 	w.Header().Set("Content-Length", strconv.Itoa(len(response)))
 	io.WriteString(w, response)
@@ -95,8 +90,8 @@ func Reverse(s string) string {
 	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
 		runes[i], runes[j] = runes[j], runes[i]
 	}
-	return s
-	//return string(runes)
+	
+	return string(runes)
 }
 
 func reverseBitsInByte(b byte) byte {
