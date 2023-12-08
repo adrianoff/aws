@@ -67,8 +67,10 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 
 	//slices.Reverse(pixelData)
 	response := ""
-	for i := 0; i < len(pixelData); i++ {
-		response = fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i])) + response
+	for i := 0; i < len(pixelData); i = i + 2 {
+		first := fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i]))
+		second := fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i+1]))
+		response = first + second + response
 	}
 
 	response = Reverse(response)
