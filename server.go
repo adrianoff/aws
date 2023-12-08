@@ -4,7 +4,6 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
-	"math/bits"
 	"net/http"
 	"os"
 	"strconv"
@@ -67,8 +66,8 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := ""
-	for i := 0; i < len(pixelData); i++ {
-		response = response + fmt.Sprintf("%02X", bits.Reverse8(reverseBitsInByte(pixelData[i])))
+	for i := len(pixelData); i > 0; i-- {
+		response = response + fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i]))
 	}
 
 	response = Reverse(response)
