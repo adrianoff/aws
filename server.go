@@ -31,13 +31,14 @@ type BitmapInfoHeader struct {
 	ColorsImportant      uint32 // Number of important colors used
 }
 
-func getTest(w http.ResponseWriter, r *http.Request) {
+var pixelData []byte
+
+func readPixelData() {
 	filename := "test.bmp"
 
 	file, err := os.Open(filename)
 	if err != nil {
 		fmt.Println("Error opening file:", err)
-		return
 	}
 	defer file.Close()
 
@@ -47,7 +48,6 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	err = binary.Read(file, binary.LittleEndian, &fileHeader)
 	if err != nil {
 		fmt.Println("Error reading file header:", err)
-		return
 	}
 
 	err = binary.Read(file, binary.LittleEndian, &infoHeader)
@@ -58,16 +58,18 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 
 	pixelDataSize := infoHeader.ImageSize
 	file.Seek(int64(fileHeader.PixelDataOffset), 0)
-	pixelData := make([]byte, pixelDataSize)
+	pixelData = make([]byte, pixelDataSize)
 	_, err = file.Read(pixelData)
 	if err != nil {
 		fmt.Println("Error reading pixel data:", err)
 		return
 	}
+}
 
+func getData(w http.ResponseWriter, r *http.Request) {
 	response := ""
 	for i := 0; i < len(pixelData); i++ {
-		response = response + fmt.Sprintf("%02X", reverseBitsInByte(pixelData[i]))
+		response = response + fmt.Sprintf("%02X", ^(pixelData[i]))
 	}
 
 	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
@@ -79,34 +81,15 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(offset, " ", offset+limit)
-	response = Reverse(response[offset : offset+limit])
+	response = response[offset : offset+limit]
 
 	w.Header().Set("Content-Length", strconv.Itoa(len(response)))
 	io.WriteString(w, response)
 }
 
-func Reverse(s string) string {
-	var substrings []string
-
-	for i := 0; i < len(s); i += 2 {
-		end := i + 2
-		if end > len(s) {
-			end = len(s)
-		}
-
-		substrings = append([]string{s[i:end]}, substrings...)
-	}
-
-	//return strings.Join(substrings, "")
-	return s
-}
-
-func reverseBitsInByte(b byte) byte {
-	return ^b
-}
-
 func main() {
-	http.HandleFunc("/test", getTest)
+	readPixelData()
+	http.HandleFunc("/data", getData)
 
 	http.ListenAndServe(":3333", nil)
 }
