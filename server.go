@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 )
 
 type BitmapFileHeader struct {
@@ -98,7 +97,8 @@ func Reverse(s string) string {
 		substrings = append([]string{s[i:end]}, substrings...)
 	}
 
-	return strings.Join(substrings, "")
+	//return strings.Join(substrings, "")
+	return s
 }
 
 func reverseBitsInByte(b byte) byte {
