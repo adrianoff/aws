@@ -34,7 +34,7 @@ type BitmapInfoHeader struct {
 var pixelData []byte
 
 func readPixelData() {
-	filename := "test.bmp"
+	filename := "weather_image.bmp"
 
 	file, err := os.Open(filename)
 	if err != nil {
