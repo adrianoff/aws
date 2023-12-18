@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  aws_backend:
+    container_name: aws_backend
+    ports:
+      - "3333:3333"
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    command: /usr/src/aws-server/server
