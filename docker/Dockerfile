@@ -7,11 +7,11 @@ RUN apt-get update && \
     ln -s /usr/bin/python3 /usr/bin/python
 
 RUN pip3 install --upgrade pip
-COPY ./python/requirements.txt /usr/src/aws-server/requirements.txt
+COPY ./converter/requirements.txt /usr/src/aws-server/requirements.txt
 RUN pip3 install -r /usr/src/aws-server/requirements.txt
 
-COPY ./python/convert.py /usr/src/aws-server
-COPY ./golang/server.go /usr/src/aws-server
+COPY ./converter/convert.py /usr/src/aws-server
+COPY ./server/server.go /usr/src/aws-server
 
 RUN go build server.go
 RUN rm server.go
