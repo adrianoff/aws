@@ -31,7 +31,48 @@ type BitmapInfoHeader struct {
 	ColorsImportant      uint32 // Number of important colors used
 }
 
+type Forecast struct {
+	Current struct {
+		WeatherCode string
+
+		Temperature struct {
+			Real     int
+			Apparent int
+			High     int
+			Low      int
+		}
+		IsDay         bool
+		Precipitation float32
+		Wind          struct {
+			Speed     int
+			Direction int
+		}
+		Sunrise string
+		Sunset  string
+	}
+
+	Hours [3]struct {
+		WeatherCode string
+		Visibility  int
+		Humidity    int
+
+		Temperature struct {
+			Real     int
+			Apparent int
+		}
+		Wind struct {
+			Speed     int
+			Direction int
+		}
+		Precipitation struct {
+			Probability int
+			Quantity    float32
+		}
+	}
+}
+
 var pixelData []byte
+var forecast Forecast
 
 func readPixelData() {
 	filename := "weather_image.bmp"
@@ -85,6 +126,10 @@ func getData(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Length", strconv.Itoa(len(response)))
 	io.WriteString(w, response)
+}
+
+func getForecast() {
+	
 }
 
 func main() {
