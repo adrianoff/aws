@@ -14,7 +14,7 @@ def convert_to_monochrome(input_image_path, output_image_path):
     img = img.transpose(Image.FLIP_LEFT_RIGHT)
 
     # Convert the grayscale image to monochrome (1-bit)
-    img = img.point(lambda x: 0 if x < 180 else 255, '1')
+    img = img.point(lambda x: 0 if x < 210 else 255, '1')
 
     # Save the monochrome image as BMP format
     img.save(output_image_path)
