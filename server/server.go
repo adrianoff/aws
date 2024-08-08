@@ -75,7 +75,7 @@ var pixelData []byte
 var forecast Forecast
 
 func readPixelData() {
-	filename := "weather_image.bmp"
+	filename := "output_image_monochrome.bmp"
 
 	file, err := os.Open(filename)
 	if err != nil {
