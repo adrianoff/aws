@@ -10,6 +10,7 @@ import (
 
 func main() {
 	var err error
+	
 	_, err = functions.GetOpenMeteoForecast()
 	if err != nil {
 		fmt.Println(err)
