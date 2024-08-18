@@ -10,18 +10,15 @@ import (
 
 func main() {
 	var err error
-	
+
 	_, err = functions.GetOpenMeteoForecast()
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	httphandler.PixelData, err = functions.ReadPixelData("./images/image.bmp")
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	http.HandleFunc("/pixels", httphandler.HandlePixelRequest)
+	http.HandleFunc("/start_session", httphandler.HandleStartSession)
+	http.HandleFunc("/stop_session", httphandler.HandleStopSession)
 
 	http.ListenAndServe(":3333", nil)
 }

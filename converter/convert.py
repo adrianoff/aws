@@ -1,5 +1,6 @@
 import imgkit
 import sys
+import os
 from PIL import Image
 
 
@@ -21,8 +22,8 @@ def convert_to_monochrome(input_image_path, output_image_path):
 
 
 # Path to save the output BMP image
-output_image_path = 'output_image.bmp'
-output_image_path_monochrome = 'output_image_monochrome.bmp'
+output_image_path = 'output_image_tmp.bmp'
+output_image_path_monochrome = sys.argv[2]
 
 # Custom CSS to set width and height
 custom_css = '''
@@ -47,5 +48,7 @@ options = {
 # Convert HTML to BMP image with custom CSS
 imgkit.from_string(sys.argv[1], output_image_path, options=options)
 convert_to_monochrome(output_image_path, output_image_path_monochrome)
+
+os.remove(output_image_path)
 
 print("Ok")

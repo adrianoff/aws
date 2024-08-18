@@ -37,3 +37,7 @@ func ReadPixelData(filename string) ([]byte, error) {
 
 	return pixelData, nil
 }
+
+func RemoveImage(filename string) {
+	os.Remove(filename)
+}
