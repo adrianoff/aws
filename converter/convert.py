@@ -21,34 +21,37 @@ def convert_to_monochrome(input_image_path, output_image_path):
     img.save(output_image_path)
 
 
-# Path to save the output BMP image
-output_image_path = 'output_image_tmp.bmp'
-output_image_path_monochrome = sys.argv[2]
+try:
+    # Path to save the output BMP image
+    output_image_path = 'output_image_tmp.bmp'
+    output_image_path_monochrome = sys.argv[2]
 
-# Custom CSS to set width and height
-custom_css = '''
-<style>
-    body {
-        width: 800px;
-        height: 480px;
+    # Custom CSS to set width and height
+    custom_css = '''
+    <style>
+        body {
+            width: 800px;
+            height: 480px;
+        }
+    </style>
+    '''
+
+    # Options for imgkit to convert HTML to an image
+    options = {
+        'format': 'bmp',
+        'quality': 100,
+        'width': 800,
+        'height': 480,
+        'disable-smart-width': '',
+        'quiet': ''
     }
-</style>
-'''
 
-# Options for imgkit to convert HTML to an image
-options = {
-    'format': 'bmp',
-    'quality': 100,
-    'width': 800,
-    'height': 480,
-    'disable-smart-width': '',
-    'quiet': ''
-}
+    # Convert HTML to BMP image with custom CSS
+    imgkit.from_string(sys.argv[1], output_image_path, options=options)
+    convert_to_monochrome(output_image_path, output_image_path_monochrome)
 
-# Convert HTML to BMP image with custom CSS
-imgkit.from_string(sys.argv[1], output_image_path, options=options)
-convert_to_monochrome(output_image_path, output_image_path_monochrome)
-
-os.remove(output_image_path)
+    os.remove(output_image_path)
+except Exception as err:
+    print(err)
 
 print("Ok")
