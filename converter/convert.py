@@ -43,7 +43,8 @@ try:
         'width': 800,
         'height': 480,
         'disable-smart-width': '',
-        'quiet': ''
+        'quiet': '',
+        "xvfb": ""
     }
 
     # Convert HTML to BMP image with custom CSS
