@@ -16,7 +16,7 @@ func ConvertToImage(template, image_filename string) {
 	buffer2.WriteString(".bmp")
 
 	cmd, err := exec.Command("python3", "-V").Output()
-	fmt.Println(cmd, err)
+	fmt.Println(string(cmd), err)
 	cmd, err = exec.Command("python3", "../converter/convert.py", buffer1.String(), buffer2.String()).Output()
-	fmt.Println(cmd, err)
+	fmt.Println(string(cmd), err)
 }
