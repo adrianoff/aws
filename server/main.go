@@ -9,12 +9,11 @@ import (
 )
 
 func main() {
-	var err error
-
-	_, err = functions.GetOpenMeteoForecast()
+	_, err := functions.GetOpenMeteoForecast()
 	if err != nil {
 		fmt.Println(err)
 	}
+	// fmt.Println(forecast)
 
 	http.HandleFunc("/pixels", httphandler.HandlePixelRequest)
 	http.HandleFunc("/start_session", httphandler.HandleStartSession)
