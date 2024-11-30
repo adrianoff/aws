@@ -45,13 +45,14 @@ func HandlePixelRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleStartSession(w http.ResponseWriter, r *http.Request) {
-	_, _ = functions.GetOpenMeteoForecast()
+	forecast, _ := functions.GetOpenMeteoForecast()
 
 	randomstring.Seed()
 	session_id := randomstring.CookieFriendlyString(32)
 
 	template := functions.ReadTemplate()
-	functions.ConvertToImage(string(template), session_id)
+	html := functions.PrepareHtml(string(template), forecast)
+	functions.ConvertToImage(html, session_id)
 
 	image_filename := strings.Join([]string{"images/", session_id, ".bmp"}, "")
 	pixelData, _ := functions.ReadPixelData(image_filename)
