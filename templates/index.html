@@ -70,14 +70,14 @@
         <p class="center low_padding">%current_weather_code%<!--Overcast--></p>
         <p class="huge">%current_temperature%°/%current_apparent_temperature%° <!-- 22°/18°--></p>
         <p><i class="fas fa-wind"></i> %current_wind_direction_10m% %current_wind_speed_10m% km/h</p>
-        <p><i class="fa-solid fa-h"></i> %current_humidity%%</p>
-        <p><i class="fa-solid fa-p"></i> %current_pressure% hPa</p>
+        <p><div style="padding-left: 5px; height: 16px; min-width: 20px; width: 20px; display: inline-block;"><b>H</b></div> %current_humidity%%</p>
+        <p><div style="padding-left: 5px; height: 16px; min-width: 20px; width: 20px; display: inline-block;"><b>P</b></div> %current_pressure% hPa</p>
         <hr/>
-        <p><i class="fa-solid fa-temperature-arrow-up"></i> %daily_temperature_2m_max%° </p>
-        <p><i class="fa-solid fa-temperature-arrow-down"></i> %daily_temperature_2m_min%°</p>
+        <p><i class="fas fa-temperature-high"></i></i> %daily_temperature_2m_max%° </p>
+        <p><i class="fas fa-temperature-low"></i></i> %daily_temperature_2m_min%°</p>
         <p><i class="fas fa-umbrella"></i> %daily_precipitation_sum% mm</p>
-        <p><i class="fas fa-sun"></i><i class="fa-solid fa-arrow-up"></i> %sunrise%</p>
-        <p><i class="fas fa-sun"></i><i class="fa-solid fa-arrow-down"></i> %sunset%</p>
+        <p><i class="fas fa-sun"></i><i class="fas fa-long-arrow-alt-up"></i></i> %sunrise%</p>
+        <p><i class="fas fa-sun"></i><i class="fas fa-long-arrow-alt-down"></i></i> %sunset%</p>
       </td>
       <td>
         <p class="huge"><i class="fas %hour1_weather_code_icon%"></i></p>
@@ -86,7 +86,7 @@
         <p><i class="fas fa-wind"></i> %hour1_wind_direction_10m% %hour1_wind_speed_10m% km/h</p>
         <p><i class="fas fa-umbrella"></i> %hour1_precipitation% mm %hour1_precipitation_probability%%</p>
         <p><i class="fas fa-eye"></i> %hour1_visibility% m</p>
-        <p><i class="fa-solid fa-h"></i> %hour1_humidity%%</p>
+        <p><div style="padding-left: 5px; height: 16px; min-width: 20px; width: 20px; display: inline-block;"><b>H</b></div> %hour1_humidity%%</p>
       </td>
       <td>
         <p class="huge"><i class="fas %hour2_weather_code_icon%"></i></p>
@@ -95,7 +95,7 @@
         <p><i class="fas fa-wind"></i> %hour2_wind_direction_10m% %hour2_wind_speed_10m% km/h</p>
         <p><i class="fas fa-umbrella"></i> %hour2_precipitation% mm %hour2_precipitation_probability%%</p>
         <p><i class="fas fa-eye"></i> %hour2_visibility% m</p>
-        <p><i class="fa-solid fa-h"></i> %hour2_humidity%%</p>
+        <p><div style="padding-left: 5px; height: 16px; min-width: 20px; width: 20px; display: inline-block;"><b>H</b></div> %hour2_humidity%%</p>
       </td>
       <td>
         <p class="huge"><i class="fas %hour3_weather_code_icon%"></i></p>
@@ -104,7 +104,7 @@
         <p><i class="fas fa-wind"></i> %hour3_wind_direction_10m% %hour3_wind_speed_10m% km/h</p>
         <p><i class="fas fa-umbrella"></i> %hour3_precipitation% mm %hour3_precipitation_probability%%</p>
         <p><i class="fas fa-eye"></i> %hour3_visibility% m</p>
-        <p><i class="fa-solid fa-h"></i> %hour3_humidity%%</p>
+        <p><div style="padding-left: 5px; height: 16px; min-width: 20px; width: 20px; display: inline-block;"><b>H</b></div> %hour3_humidity%%</p>
       </td>
     </tr>
   </table>

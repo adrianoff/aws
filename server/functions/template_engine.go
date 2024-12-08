@@ -94,12 +94,12 @@ var weatherCodeIcons = map[string]string{
 	"Heavy shower night":  "fa-cloud-showers-heavy",
 	"Snow shower night":   "fa-cloud-showers-heavy",
 
-	"Thunderstorm day":               "fa-cloud-bolt",
-	"Thunderstorm, hail day":         "fa-cloud-bolt",
-	"Thunderstorm, heavy hail day":   "fa-cloud-bolt",
-	"Thunderstorm night":             "fa-cloud-bolt",
-	"Thunderstorm, hail night":       "fa-cloud-bolt",
-	"Thunderstorm, heavy hail night": "fa-cloud-bolt",
+	"Thunderstorm day":               "fa-bolt",
+	"Thunderstorm, hail day":         "fa-bolt",
+	"Thunderstorm, heavy hail day":   "fa-bolt",
+	"Thunderstorm night":             "fa-bolt",
+	"Thunderstorm, hail night":       "fa-bolt",
+	"Thunderstorm, heavy hail night": "fa-bolt",
 }
 
 var isDayMap = map[int]string{
@@ -169,11 +169,10 @@ func PrepareHtml(template string, forecast *structures.OpenMeteoResponse) string
 	html = strings.Replace(html, "%sunset%", sunsetStr, 1)
 	html = strings.Replace(html, "%sunrise%", sunriseStr, 1)
 
-
 	currentHour := parseTime.Hour()
 	for i := 1; i <= 3; i++ {
-		hour := currentHour+i+1
-		hourStr := "hour"+strconv.Itoa(i)
+		hour := currentHour + i + 1
+		hourStr := "hour" + strconv.Itoa(i)
 
 		hourParseTime, err := time.Parse("2006-01-02T15:04", forecast.Hourly.Time[hour])
 		if err != nil {
@@ -192,17 +191,17 @@ func PrepareHtml(template string, forecast *structures.OpenMeteoResponse) string
 			hourWeatherIcon = "fa-circle-question"
 		}
 
-		html = strings.Replace(html, "%" + hourStr + "_time%", hourParseTime.Format("15:04"), 1)
-		html = strings.Replace(html, "%" + hourStr + "_weather_code%", hourWeatherCode, 1)
-		html = strings.Replace(html, "%" + hourStr + "_weather_code_icon%", hourWeatherIcon, 1)
-		html = strings.Replace(html, "%" + hourStr + "_temperature%", fmt.Sprintf("%.1f", forecast.Hourly.Temperature[hour]), 1)
-		html = strings.Replace(html, "%" + hourStr + "_apparent_temperature%", fmt.Sprintf("%.1f", forecast.Hourly.ApparentTemperature[hour]), 1)
-		html = strings.Replace(html, "%" + hourStr + "_wind_direction_10m%", strconv.Itoa(forecast.Hourly.WindDirection[hour]), 1)
-		html = strings.Replace(html, "%" + hourStr + "_wind_speed_10m%", fmt.Sprintf("%.1f", forecast.Hourly.WindSpeed[hour]), 1)
-		html = strings.Replace(html, "%" + hourStr + "_precipitation%", fmt.Sprintf("%.1f", forecast.Hourly.Precipitation[hour]), 1)
-		html = strings.Replace(html, "%" + hourStr + "_precipitation_probability%", strconv.Itoa(forecast.Hourly.PrecipitationProbability[hour]), 1)
-		html = strings.Replace(html, "%" + hourStr + "_visibility%", fmt.Sprintf("%.1f", forecast.Hourly.Visibility[hour]), 1)
-		html = strings.Replace(html, "%" + hourStr + "_humidity%", strconv.Itoa(forecast.Hourly.Humidity[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_time%", hourParseTime.Format("15:04"), 1)
+		html = strings.Replace(html, "%"+hourStr+"_weather_code%", hourWeatherCode, 1)
+		html = strings.Replace(html, "%"+hourStr+"_weather_code_icon%", hourWeatherIcon, 1)
+		html = strings.Replace(html, "%"+hourStr+"_temperature%", fmt.Sprintf("%.1f", forecast.Hourly.Temperature[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_apparent_temperature%", fmt.Sprintf("%.1f", forecast.Hourly.ApparentTemperature[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_wind_direction_10m%", strconv.Itoa(forecast.Hourly.WindDirection[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_wind_speed_10m%", fmt.Sprintf("%.1f", forecast.Hourly.WindSpeed[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_precipitation%", fmt.Sprintf("%.1f", forecast.Hourly.Precipitation[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_precipitation_probability%", strconv.Itoa(forecast.Hourly.PrecipitationProbability[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_visibility%", fmt.Sprintf("%.1f", forecast.Hourly.Visibility[hour]), 1)
+		html = strings.Replace(html, "%"+hourStr+"_humidity%", strconv.Itoa(forecast.Hourly.Humidity[hour]), 1)
 	}
 
 	html = strings.Replace(html, "\n", "", -1)
