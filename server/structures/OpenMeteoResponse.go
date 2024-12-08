@@ -10,6 +10,8 @@ type OpenMeteoResponse struct {
 		ApparentTemperature float32 `json:"apparent_temperature"`
 		IsDay               int     `json:"is_day"`
 		Precipitation       float32 `json:"precipitation"`
+		Humidity            int     `json:"relative_humidity_2m"`
+		Pressure            float32 `json:"surface_pressure"`
 		WindSpeed           float32 `json:"wind_speed_10m"`
 		WindDirection       int     `json:"wind_direction_10m"`
 		WeatherCode         int     `json:"weather_code"`
@@ -30,7 +32,9 @@ type OpenMeteoResponse struct {
 		Precipitation            []float32 `json:"precipitation"`
 		WeatherCode              []int     `json:"weather_code"`
 		Visibility               []float32 `json:"visibility"`
+		Humidity                 []int     `json:"relative_humidity_2m"`
 		WindSpeed                []float32 `json:"wind_speed_10m"`
 		WindDirection            []int     `json:"wind_direction_10m"`
+		IsDay                    []int     `json:"is_day"`
 	} `json:"hourly"`
 }

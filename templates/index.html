@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Weather Forecast</title>
   <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet">
   <style>
     body {
       font-family: 'Ubuntu Mono', monospace;
@@ -58,54 +58,52 @@
 <body>
   <table>
     <tr>
-      <th>15 Dec 2023, Wed<br/> 15:26</th>
-      <th>12:00</th>
-      <th>13:00</th>
-      <th>14:00</th>
+      <th>%current_date%, %current_dayofweek%<br/> %current_time%</th>  
+      <th>%hour1_time%</th>
+      <th>%hour2_time%</th>
+      <th>%hour3_time%</th>
     </tr>
     <tr>
       <td>
-        <p class="huge"><i class="fas fa-sun"></i></p>
+        <p class="huge"><i class="fas %current_weather_code_icon%"></i></p>
         <p class="center low_padding">%current_weather_code%<!--Overcast--></p>
         <p class="huge">%current_temperature%°/%current_apparent_temperature%° <!-- 22°/18°--></p>
-        <p><i class="fas fa-wind"></i>%current_wind_direction_10m% %current_wind_speed_10m% m/s</p>
-        <p><i class="fas fa-cloud-showers-heavy"></i> Heavy Rain 20%</p>
-        <p><i class="fas fa-eye"></i> 11 km</p>
+        <p><i class="fas fa-wind"></i> %current_wind_direction_10m% %current_wind_speed_10m% km/h</p>
+        <p><i class="fa-solid fa-h"></i> %current_humidity%%</p>
+        <p><i class="fa-solid fa-p"></i> %current_pressure% hPa</p>
         <hr/>
-        <p class="huge">H: %daily_temperature_2m_max%° L: %daily_temperature_2m_min%°</p>
-        <p class="center "><i class="fas fa-umbrella"></i> %daily_precipitation_sum% mm</p>
-        <p class="center">Sunrise: %sunrise%</p>
-        <p class="center">Sunset: %sunset%</p>
+        <p><i class="fa-solid fa-temperature-arrow-up"></i> %daily_temperature_2m_max%° </p>
+        <p><i class="fa-solid fa-temperature-arrow-down"></i> %daily_temperature_2m_min%°</p>
+        <p><i class="fas fa-umbrella"></i> %daily_precipitation_sum% mm</p>
+        <p><i class="fas fa-sun"></i><i class="fa-solid fa-arrow-up"></i> %sunrise%</p>
+        <p><i class="fas fa-sun"></i><i class="fa-solid fa-arrow-down"></i> %sunset%</p>
       </td>
       <td>
-        <p class="huge"><i class="fas fa-cloud-sun"></i></p>
-        <p class="center low_padding">Fair</p>
-        <p class="huge">22°/18°</p>
-        <p><i class="fas fa-wind"></i> E 12 m/s</p>
-        <p><i class="fas fa-snowflake"></i> Snow 20%</p>
-        <p><i class="fas fa-umbrella"></i> 2 mm</p>
-        <p><i class="fas fa-eye"></i> 15 km</p>
-        <p><i class="fas humidity">H</i> 72 %</p>
+        <p class="huge"><i class="fas %hour1_weather_code_icon%"></i></p>
+        <p class="center low_padding">%hour1_weather_code%</p>
+        <p class="huge">%hour1_temperature%°/%hour1_apparent_temperature%°</p>
+        <p><i class="fas fa-wind"></i> %hour1_wind_direction_10m% %hour1_wind_speed_10m% km/h</p>
+        <p><i class="fas fa-umbrella"></i> %hour1_precipitation% mm %hour1_precipitation_probability%%</p>
+        <p><i class="fas fa-eye"></i> %hour1_visibility% m</p>
+        <p><i class="fa-solid fa-h"></i> %hour1_humidity%%</p>
       </td>
       <td>
-        <p class="huge"><i class="fas fa-cloud-rain"></i></p>
-        <p class="center low_padding">Partly cloudy</p>
-        <p class="huge">22°/18°</p>
-        <p><i class="fas fa-wind"></i> SE 15 m/s</p>
-        <p><i class="fas fa-cloud-rain"></i> Light Rain 20%</p>
-        <p><i class="fas fa-umbrella"></i> 3 mm</p>
-        <p><i class="fas fa-eye"></i> 20 km</p>
-        <p><i class="fas humidity">H</i> 72 %</p>
+        <p class="huge"><i class="fas %hour2_weather_code_icon%"></i></p>
+        <p class="center low_padding">%hour2_weather_code%</p>
+        <p class="huge">%hour2_temperature%°/%hour2_apparent_temperature%°</p>
+        <p><i class="fas fa-wind"></i> %hour2_wind_direction_10m% %hour2_wind_speed_10m% km/h</p>
+        <p><i class="fas fa-umbrella"></i> %hour2_precipitation% mm %hour2_precipitation_probability%%</p>
+        <p><i class="fas fa-eye"></i> %hour2_visibility% m</p>
+        <p><i class="fa-solid fa-h"></i> %hour2_humidity%%</p>
       </td>
       <td>
-        <p class="huge"><i class="fas fa-sun"></i></p>
-        <p class="center low_padding">Slight rain</p>
-        <p class="huge">22°/18°</p>
-        <p><i class="fas fa-wind"></i> S 8 m/s</p>
-        <p><i class="fas fa-cloud-showers-heavy"></i> Light Rain 20%</p>
-        <p><i class="fas fa-umbrella"></i> 2 mm</p>
-        <p><i class="fas fa-eye"></i> 21 km</p>
-        <p><i class="fas humidity">H</i> 72 %</p>
+        <p class="huge"><i class="fas %hour3_weather_code_icon%"></i></p>
+        <p class="center low_padding">%hour3_weather_code%</p>
+        <p class="huge">%hour3_temperature%°/%hour3_apparent_temperature%°</p>
+        <p><i class="fas fa-wind"></i> %hour3_wind_direction_10m% %hour3_wind_speed_10m% km/h</p>
+        <p><i class="fas fa-umbrella"></i> %hour3_precipitation% mm %hour3_precipitation_probability%%</p>
+        <p><i class="fas fa-eye"></i> %hour3_visibility% m</p>
+        <p><i class="fa-solid fa-h"></i> %hour3_humidity%%</p>
       </td>
     </tr>
   </table>
