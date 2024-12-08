@@ -51,7 +51,7 @@ try:
     imgkit.from_string(sys.argv[1], output_image_path, options=options)
     convert_to_monochrome(output_image_path, output_image_path_monochrome)
 
-    os.remove(output_image_path)
+    #os.remove(output_image_path)
 except Exception as err:
     print(err)
 
